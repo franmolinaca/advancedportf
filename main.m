@@ -1,14 +1,27 @@
-% Description blabla
-%
-% fran.mocas@gmail.com, 2019-11-30
+% Yifan
+% Nov 2019
 
-% NOTATION: f ... func
-disp('Request historical YTD Bitcoin price and plot Close, High and Low');
-initDate = '1-Jan-2018';
-symbol = 'BTC-USD';
-btcusd = getMarketDataViaYahoo(symbol, initDate);
-btcusdts = timeseries([btcusd.Close, btcusd.High, btcusd.Low], datestr(btcusd(:,1).Date));
-btcusdts.DataInfo.Units = 'USD';
-btcusdts.Name = symbol;
-plot(btcusdts);
-legend({'Close', 'High', 'Low'});
+% =============== GLOBAL VARIABLE =============== %
+
+initDate = '1-Jan-2009';
+endDate = '1-Jan-2019';
+
+% Size of portfolio optimization pool
+poolSize = 4; % in years
+
+% Investment term
+investmentTerm = 1; % in years
+
+tickerLst = {'QQQ', 'VNQ', 'XLF', 'XLV', 'XLP', 'XLU', 'XLE', 'XLI', 'IBB', 'ITA'};    % 'XLC' starts in 2018
+
+% =============== DATA PREP =============== %
+
+excessReturnData = getExcessReturnData(tickerLst, initDate, endDate);
+
+% =============== Investment Strategy =============== %
+
+[tangencyPortfolioWeight, strategyOutcome] = ...
+	getRollingPortfolio(excessReturnData, tickerLst, initDate, endDate, ...
+						poolSize, investmentTerm);
+
+
