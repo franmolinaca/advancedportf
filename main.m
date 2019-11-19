@@ -3,25 +3,25 @@
 
 % =============== GLOBAL VARIABLE =============== %
 
+% Start and end date of the sample
 initDate = '1-Jan-2009';
 endDate = '1-Jan-2019';
 
-% Size of portfolio optimization pool
-poolSize = 4; % in years
+% Size of portfolio optimization pool in years
+poolSize = 4;
 
-% Investment term
-investmentTerm = 1; % in years
+% Investment term in years
+investmentTerm = 1;
 
+% Sector diversification
 tickerLst = {'QQQ', 'VNQ', 'XLF', 'XLV', 'XLP', 'XLU', 'XLE', 'XLI', 'IBB', 'ITA'};    % 'XLC' starts in 2018
 
-% =============== DATA PREP =============== %
+% Country diversification
 
-excessReturnData = getExcessReturnData(tickerLst, initDate, endDate);
 
 % =============== Investment Strategy =============== %
 
 [tangencyPortfolioWeight, strategyOutcome] = ...
-	getRollingPortfolio(excessReturnData, tickerLst, initDate, endDate, ...
-						poolSize, investmentTerm);
+	getRollingPortfolio(tickerLst, initDate, endDate, poolSize, investmentTerm);
 
 
