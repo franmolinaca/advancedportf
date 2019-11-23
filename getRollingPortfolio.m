@@ -1,31 +1,15 @@
 % Yifan
 % Nov 2019
 
-function [tangencyPortfolioWeight, strategyOutcome] = ...
-	getRollingPortfolio(tickerLst, initDate, endDate, poolSize, investmentTerm)
-
-% Fetch data from web
-indexData = getIndexReturn(tickerLst, initDate, endDate);
-riskfreeRateData = getRiskfreeRate(initDate, endDate);
-
-% Calculate excess return
-excessReturnData = join(indexData, riskfreeRateData);
-
-for idx = 1 : length(tickerLst)
-	symbol = char(tickerLst(idx));
-	excessReturnData.(symbol) = excessReturnData.(symbol) - excessReturnData.RiskFreeRate;
-end
-
-excessReturnData = table2timetable(excessReturnData);
+function [tangencyPortfolioWeight, strategyOutcome] = getRollingPortfolio(excessReturnData, ...
+	tickerNameLst, initDate, endDate, tradingDays, poolSize, investTerm)
 
 % Create tagency-portfolio-weight-matrix and strategy-outcome-matrix
-
-nrow = length(tickerLst);
-ncol = ( round( years( datetime(endDate) - datetime(initDate) ) ) - poolSize ) * 1 / investmentTerm + 1;
+nrow = length(tickerNameLst);
+ncol = ( round( years( datetime(endDate) - datetime(initDate) ) ) - poolSize ) / investTerm;
 
 tangencyPortfolioWeight = zeros(nrow, ncol);
-strategyOutcome = zeros(3, ncol);
-
+strategyOutcome = zeros(4, ncol);
 
 % Tangency Portfolio
 poolInit = datetime(initDate);
@@ -34,18 +18,21 @@ poolEnd = poolInit + years(poolSize);
 for idx = 1 : ncol
 	portfolioPool = excessReturnData(timerange(poolInit, poolEnd), :);
 	
-	w = getTangencyPortfolio(portfolioPool, tickerLst);
+	w = getTangencyPortfolio(portfolioPool, tickerNameLst);
 
 	tangencyPortfolioWeight(:, idx) = w;
 
 	investInit = poolEnd;
-	investEnd = investInit + years(investmentTerm);
+	investEnd = investInit + years(investTerm);
 
-	[portfolioReturn, portfolioVotality, riskfreeRate] = getStrategyOutcome(portfolioPool, tickerLst, w);
-	strategyOutcome(:, idx) = [portfolioReturn; portfolioVotality; riskfreeRate];
+	investPool = excessReturnData(timerange(investInit, investEnd), :);
+
+	[portfolioReturn, portfolioVotality, riskfreeRate, ratioSharpe] = ...
+		getStrategyOutcome(investPool, tickerNameLst, w, tradingDays);
+	strategyOutcome(:, idx) = [portfolioReturn; portfolioVotality; riskfreeRate; ratioSharpe];
 
 	% Roll portfolio pool forward
-	poolInit = poolInit + years(investmentTerm);
+	poolInit = poolInit + years(investTerm);
 	poolEnd = poolInit + years(poolSize);
 end
 

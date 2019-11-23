@@ -1,19 +1,24 @@
-% Yifan
-% Nov 2019
+function w = getTangencyPortfolio(portfolioPool, tickerNameLst)
+% Calculate the weight of tangency portfolio for a given portfolio pool with asset in a list of tickers
+% 
+% Usage:     w = getTangencyPortfolio(portfolioPool, tickerNameLst)
+% Inputs:    portfolioPool 
+%            tickerNameLst
+% 
+% Output:    w
+% 
 
-function w = getTangencyPortfolio(portfolioPool, tickerLst)
+returnMatrix = getReturnMatrix(portfolioPool, tickerNameLst);
 
-returnMatrix = getReturnMatrix(portfolioPool, tickerLst);
-
-covMatrix = getCovMatrix(portfolioPool, tickerLst);
+covMatrix = getCovMatrix(portfolioPool, tickerNameLst);
 
 % Construct tangency portfolio
 objFun = @(w) getRatioSharpe(w, portfolioPool, returnMatrix, covMatrix);
 
-w0 = [zeros(length(tickerLst)-1, 1); 1];
+w0 = [zeros(length(tickerNameLst)-1, 1); 1];
 
 w = fmincon(objFun, w0, ...
-	-eye(length(tickerLst)), zeros(length(tickerLst), 1), ...
-	ones(length(tickerLst), 1).', 1);
+	-eye(length(tickerNameLst)), zeros(length(tickerNameLst), 1), ...
+	ones(length(tickerNameLst), 1).', 1);
 
 end

@@ -1,5 +1,5 @@
-% Obtained from https://github.com/Lenskiy/market-data-functions on
-% 2019-10-30
+% Obtained from https://github.com/Lenskiy/market-data-functions
+% on 2019-10-30
 function data = getMarketDataViaYahoo(symbol, startdate, enddate, interval)
     % Downloads market data from Yahoo Finance for a specified symbol and 
     % time range.

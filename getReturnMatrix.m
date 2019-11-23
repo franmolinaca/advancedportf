@@ -1,15 +1,15 @@
 % Yifan
 % Nov 2019
 
-function returnMatrix = getReturnMatrix(portfolioPool, tickerLst)
+function returnMatrix = getReturnMatrix(assetPool, tickerNameLst)
 
-% Expected return of the portfolio pool
+% Expected return of the asset pool
 
-returnMatrix = zeros(length(tickerLst), 1);
+returnMatrix = zeros(length(tickerNameLst), 1);
 
-for idx = 1 : length(tickerLst)
-	symbol = char(tickerLst(idx));
-	returnMatrix(idx, 1) = mean(portfolioPool.(symbol));
+for idx = 1 : length(tickerNameLst)
+	symbol = char(tickerNameLst(idx));
+	returnMatrix(idx, 1) = mean(assetPool.(symbol));
 end
 
 end

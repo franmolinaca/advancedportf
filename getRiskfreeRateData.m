@@ -1,13 +1,19 @@
-% Yifan
-% Nov 2019
+function riskfreeRateData = getRiskfreeRateData(initDate, endDate, tradingDays)
+% Get risk-free rate data for a given time period
+% 
+% Usage: riskfreeRateData = getRiskfreeRate(initDate, endDate)
+% 
+% Inputs:    initDate
+%            endDate
+% 
+% Output:    riskfreeRateData
+% 
 
-function riskfreeRateData = getRiskfreeRate(initDate, endDate)
-	series = 'DTB3';
-	tradingDays = 252.75;
+	url = 'https://fred.stlouisfed.org/'; % Federal Reserve Economic Data
 
-	url = 'https://fred.stlouisfed.org/';
+	series = 'DTB3'; % 3-month treasury bill secondary market rate
+
 	c = fred(url);
-
 	d = fetch(c,series);
 	close(c);
 
@@ -30,6 +36,6 @@ function riskfreeRateData = getRiskfreeRate(initDate, endDate)
 	riskfreeRateData = fillmissing(riskfreeRateData, 'previous');
 	riskfreeRateData = fillmissing(riskfreeRateData, 'nearest');
 
-	writetable(riskfreeRateData, 'riskfreeRateData.dat');
+	% writetable(riskfreeRateData, 'riskfreeRateData.dat');
 
 end
