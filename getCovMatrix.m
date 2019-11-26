@@ -6,7 +6,7 @@ function covMatrix = getCovMatrix(assetPool, tickerNameLst)
 % Inputs:    assetPool 
 %            tickerNameLst
 % 
-% Output:     covMatrix
+% Output:    covMatrix
 % 
 
 covMatrix = zeros(length(tickerNameLst), length(tickerNameLst));
