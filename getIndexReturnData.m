@@ -1,13 +1,13 @@
-function indexReturn = getIndexReturnData(tickerLst, tickerNameLst, initDate, endDate)
+function indexReturnData = getIndexReturnData(tickerLst, tickerNameLst, initDate, endDate)
 % Get return data for asset in a list of tickers with initial date and end specified
 % 
-% Usage: indexReturn = getIndexReturn(tickerLst, initDate, endDate)
+% Usage: indexReturnData = getIndexReturnData(tickerLst, initDate, endDate)
 % 
-% Inputs:    tickerLst
-%            initDate
-%            endDate
-% 
-% Output:    indexReturn
+% Inputs:    tickerLst ....
+%            initDate  ....
+%            endDate  .....
+%
+% Output:    indexReturnData ... 
 % 
 	Date = (datetime(initDate) : datetime(endDate)).';
 	indexData = table(Date);
@@ -26,13 +26,13 @@ function indexReturn = getIndexReturnData(tickerLst, tickerNameLst, initDate, en
 		indexData = outerjoin(indexData, dataFetch, 'Type', 'left', 'MergeKeys', true);
 	end
 
-	indexReturn = rmmissing(indexData);
+	indexReturnData = rmmissing(indexData);
 
 	for idx = 1 : length(tickerNameLst)
 		symbolName = char(tickerNameLst(idx));
-		indexReturn.(symbolName)(2:end) = log( indexReturn.(symbolName)(2:end) ./ indexReturn.(symbolName)(1:end-1) ) .* 100;
+		indexReturnData.(symbolName)(2:end) = log( indexReturnData.(symbolName)(2:end) ./ indexReturnData.(symbolName)(1:end-1) ) .* 100;
 	end
 
-	indexReturn(1, :) = [];
+	indexReturnData(1, :) = [];
 
 end

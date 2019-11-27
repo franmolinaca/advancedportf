@@ -1,11 +1,12 @@
 function w = getTangencyPortfolio(portfolioPool, tickerNameLst)
-% Calculate the weight of tangency portfolio for a given portfolio pool with asset in a list of tickers
+% Calculate the weight vector for the tangency portfolio of the pool
 % 
 % Usage:     w = getTangencyPortfolio(portfolioPool, tickerNameLst)
-% Inputs:    portfolioPool 
-%            tickerNameLst
 % 
-% Output:    w
+% Inputs:    portfolioPool ... Portfolio pool
+%            tickerNameLst ... List of ticker names of asset in the pool
+% 
+% Output:    w ............... Weight vector of the tangency portfolio
 % 
 
 returnMatrix = getReturnMatrix(portfolioPool, tickerNameLst);

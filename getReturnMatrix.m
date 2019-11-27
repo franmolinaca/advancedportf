@@ -1,7 +1,13 @@
-% Yifan
-% Nov 2019
-
 function returnMatrix = getReturnMatrix(assetPool, tickerNameLst)
+% Calculate the return matrix of a portfolio
+% 
+% Usage: returnMatrix = getReturnMatrix(assetPool, tickerNameLst)
+% 
+% Inputs:    assetPool ......... Asset Pool
+%            tickerNameLst ..... List of ticker names of asset in the pool
+% 
+% Output:    returnMatrix ......... Return Matrix
+% 
 
 % Expected return of the asset pool
 

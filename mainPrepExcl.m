@@ -1,54 +1,11 @@
-% main program for advanced portfolio management
+% backup for main program
 
-% main.m has following components
-% 1 define global variable used through the program
-% 2 get data on risk-free rate and index return & data prep
-% 3 get weight for the tangency portfolio and simulate the investment outcome
-% 4 plot
+% in case of internet error
+% this file load data from local and process with the computation
 
-% =============== 1 GLOBAL VARIABLE =============== %
+load main.mat
 
-	% start and end date of the sample
-	initDate = '1-Jan-2008';
-	endDate = '1-Jan-2019';
-
-	% trading days in a year
-	tradingDays = 252.75;
-
-	% size of portfolio optimization pool in years
-	poolSize = 4;
-
-	% investment term in years
-	investTerm_12m = 1;
-	investTerm_3m = 0.25;
-
-	% sector diversification
-	sectorTickerLst = {'QQQ', 'VNQ', 'XLF', 'XLV', 'XLP', 'XLU', 'XLE', 'XLI', 'IBB', 'ITA'};
-	sectorTickerNameLst = {'QQQ', 'VNQ', 'XLF', 'XLV', 'XLP', 'XLU', 'XLE', 'XLI', 'IBB', 'ITA'};
-
-	% country diversification
-	countryTickerLst = {'^N225', '^HSI', '^N100', '^NSEI', 'XMD.TO', '^AXJO', '^GDAXI', '^GSPC'};
-	countryTickerNameLst = {'N225', 'HSI', 'N100', 'NSEI', 'XMDTO', 'AXJO', 'GDAXI', 'GSPC'};
-
-% =============== 2 DATA PREP =============== %
-	riskfreeRateData = getRiskfreeRateData(initDate, endDate, tradingDays);
-
-	% writetable(riskfreeRateData, 'riskfreeRateData.dat');
-
-	sectorReturnData = getIndexReturnData(sectorTickerLst, sectorTickerNameLst, initDate, endDate);
-	countryReturnData = getIndexReturnData(countryTickerLst, countryTickerNameLst, initDate, endDate);
-
-	% writetable(sectorReturnData, 'sectorReturnData.dat');
-	% writetable(countryReturnData, 'countryReturnData.dat');
-
-	sectorExcessReturnData = getExcessReturnData(sectorReturnData, ...
-		sectorTickerNameLst, riskfreeRateData);
-	countryExcessReturnData = getExcessReturnData(countryReturnData, ...
-		countryTickerNameLst, riskfreeRateData);
-
-	save main.mat
-
-% =============== 3 INVESTMENT STRATEGY =============== %
+% =============== INVESTMENT STRATEGY =============== %
 
 	[sectorPortfolioWeight_12m, sectorStratOutcome_12m] = getRollingPortfolio(sectorExcessReturnData, ...
 		sectorTickerNameLst, initDate, endDate, tradingDays, poolSize, investTerm_12m);
@@ -62,7 +19,7 @@
 	[countryPortfolioWeight_3m, countryStratOutcome_3m] = getRollingPortfolio(countryExcessReturnData, ...
 		countryTickerNameLst, initDate, endDate, tradingDays, poolSize, investTerm_3m);
 
-% =============== 4 PLOT =============== %
+% =============== PLOT =============== %
 
 	% ----- sector 12m ----- %
 		fig_sector_12m = figure('Name', 'Sector Diversification 12m', 'NumberTitle', 'off');

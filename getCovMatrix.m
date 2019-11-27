@@ -1,12 +1,12 @@
 function covMatrix = getCovMatrix(assetPool, tickerNameLst)
-% Calculate covariance matrix of a portfolio consisting of asset in a list of tickers
+% Calculate the covariance matrix of a portfolio
 % 
 % Usage: covMatrix = getCovMatrix(assetPool, tickerNameLst)
 % 
-% Inputs:    assetPool 
-%            tickerNameLst
+% Inputs:    assetPool ......... Asset Pool
+%            tickerNameLst ..... List of ticker names of asset in the pool
 % 
-% Output:    covMatrix
+% Output:    covMatrix ......... Covariance Matrix
 % 
 
 covMatrix = zeros(length(tickerNameLst), length(tickerNameLst));
