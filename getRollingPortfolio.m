@@ -18,9 +18,9 @@ poolEnd = poolInit + years(poolSize);
 for idx = 1 : ncol
 	portfolioPool = excessReturnData(timerange(poolInit, poolEnd), :);
 	
-	w = getTangencyPortfolio(portfolioPool, tickerNameLst);
+	wg = getTangencyPortfolio(portfolioPool, tickerNameLst);
 
-	tangencyPortfolioWeight(:, idx) = w;
+	tangencyPortfolioWeight(:, idx) = wg;
 
 	investInit = poolEnd;
 	investEnd = investInit + years(investTerm);
@@ -28,7 +28,7 @@ for idx = 1 : ncol
 	investPool = excessReturnData(timerange(investInit, investEnd), :);
 
 	[portfolioReturn, portfolioVotality, riskfreeRate, ratioSharpe] = ...
-		getStrategyOutcome(investPool, tickerNameLst, w, tradingDays);
+		getStrategyOutcome(investPool, tickerNameLst, wg, tradingDays);
 	strategyOutcome(:, idx) = [portfolioReturn; portfolioVotality; riskfreeRate; ratioSharpe];
 
 	% Roll portfolio pool forward

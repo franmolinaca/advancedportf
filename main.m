@@ -1,4 +1,5 @@
-% main program for advanced portfolio management
+% main program for Advanced portfolio management comparison between sector
+% or country diversified rolling portfolios.
 
 % main.m has following components
 % 1 define global variable used through the program
@@ -195,5 +196,58 @@
 		legend(countryTickerNameLst, 'Location', 'eastoutside');
 
 		saveas(gcf,'Country_3m.png');
+        
+       
+% ----- countrysector 12m ----- %
+		fig_countrysector_12m = figure('Name', 'Diversification comparison 12m', 'NumberTitle', 'off');
 
+		fig_pos = get(gcf, 'Position');
+		fig_pos(1) = 0.5 * fig_pos(1); 
+		fig_pos(3) = 1.5 * fig_pos(3); 
+		set(gcf, 'Position', fig_pos);
 
+		% plot return and sharpe ratio
+		subplot(2, 2, [1,2]);
+
+		yyaxis left;
+		plot(sectorStratOutcome_12m(1, :));
+        hold on
+        plot(countryStratOutcome_12m(1, :));
+		ylabel('Annual Return %');
+		yyaxis right;
+		plot(sectorStratOutcome_12m(4, :));
+        hold on
+        plot(countryStratOutcome_12m(4, :));
+		ylabel('Sharpe Ratio');
+		title('Sector Diversification 12m: Return & Sharpe Ratio');
+		xlabel('Investment Period');
+		legend('Sector Annual Return','Country Annual Return', 'Sector Sharpe Ratio', 'Country Sharpe Ratio', 'Location', 'eastoutside');
+
+		% plot weight
+		subplot(2, 2, 3);
+
+		bar(sectorPortfolioWeight_12m.', 'stacked');
+		ylim([0 1]);
+		title('Sector Diversification 12m: Weight of the tangency portfolio');
+		xlabel('Investment Period');
+		ylabel('Weight');
+		legend(sectorTickerNameLst, 'Location', 'eastoutside');
+        
+		% plot weight
+		subplot(2, 2, 4);
+
+		bar(countryPortfolioWeight_12m.', 'stacked');
+		ylim([0 1]);
+		title('Country Diversification 12m: Weight of the tangency portfolio');
+		xlabel('Investment Period');
+		ylabel('Weight');
+		legend(countryTickerNameLst, 'Location', 'eastoutside');
+        
+        saveas(gcf,'CountrySector_12m.png');
+        
+        
+% Declaration of authorship
+% We hereby certify that
+% We have written the program ourselves except for clearly marked pieces of code 
+% We have tested the program and it ran without crashing
+% Leonardo Aldeghi, Francisco Molina, Yifan Zhu
