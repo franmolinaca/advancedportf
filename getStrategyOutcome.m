@@ -10,7 +10,7 @@ covMatrix = getCovMatrix(investPool, tickerNameLst);
 % Calculate strategy outcome
 portfolioReturn = sum( w .* returnMatrix ) * tradingDays;
 portfolioVotality = sqrt(w.' * covMatrix * w) * sqrt(tradingDays);
-riskfreeRate = mean(investPool.RiskFreeRate) * tradingDays;
+
 ratioSharpe = portfolioReturn / portfolioVotality;
 
 end
