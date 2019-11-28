@@ -29,6 +29,7 @@ for idx = 1 : ncol
 
 	[portfolioReturn, portfolioVotality, riskfreeRate, ratioSharpe] = ...
 		getStrategyOutcome(investPool, tickerNameLst, wg, tradingDays);
+    
 	strategyOutcome(:, idx) = [portfolioReturn; portfolioVotality; riskfreeRate; ratioSharpe];
 
 	% Roll portfolio pool forward
