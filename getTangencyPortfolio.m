@@ -14,7 +14,7 @@ returnMatrix = getReturnMatrix(portfolioPool, tickerNameLst);
 covMatrix = getCovMatrix(portfolioPool, tickerNameLst);
 
 % Construct tangency portfolio
-objFun = @(w) getRatioSharpe(w, portfolioPool, returnMatrix, covMatrix);
+objFun = @(w) getInverseRatioSharpe(w, portfolioPool, returnMatrix, covMatrix);
 
 w0 = [zeros(length(tickerNameLst)-1, 1); 1];
 
