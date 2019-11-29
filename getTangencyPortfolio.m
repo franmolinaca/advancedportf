@@ -3,7 +3,7 @@ function w = getTangencyPortfolio(portfolioPool, tickerNameLst)
 % 
 % Usage:     w = getTangencyPortfolio(portfolioPool, tickerNameLst)
 % 
-% Inputs:    portfolioPool ... Portfolio pool
+% Inputs:    portfolioPool ... Pool of portfolio
 %            tickerNameLst ... List of ticker names of asset in the pool
 % 
 % Output:    w ............... Weight vector of the tangency portfolio

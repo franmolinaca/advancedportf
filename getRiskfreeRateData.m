@@ -3,10 +3,11 @@ function riskfreeRateData = getRiskfreeRateData(initDate, endDate, tradingDays)
 % 
 % Usage: riskfreeRateData = getRiskfreeRate(initDate, endDate)
 % 
-% Inputs:    initDate
-%            endDate
-% 
-% Output:    riskfreeRateData
+% Inputs:    initDate ........... Beginning date of the data
+%            endDate ............ Ending date
+%            tradingDays ........ Trading days in a year
+%
+% Output:    riskfreeRateData ... Data of risk-free rate
 % 
 
 	url = 'https://fred.stlouisfed.org/'; % Federal Reserve Economic Data

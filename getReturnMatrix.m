@@ -3,13 +3,11 @@ function returnMatrix = getReturnMatrix(assetPool, tickerNameLst)
 % 
 % Usage: returnMatrix = getReturnMatrix(assetPool, tickerNameLst)
 % 
-% Inputs:    assetPool ......... Asset Pool
+% Inputs:    assetPool ......... Pool of asset
 %            tickerNameLst ..... List of ticker names of asset in the pool
 % 
-% Output:    returnMatrix ......... Return Matrix
+% Output:    returnMatrix ......... Return matrix
 % 
-
-% Expected return of the asset pool
 
 returnMatrix = zeros(length(tickerNameLst), 1);
 

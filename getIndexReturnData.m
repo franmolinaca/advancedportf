@@ -3,11 +3,11 @@ function indexReturnData = getIndexReturnData(tickerLst, tickerNameLst, initDate
 % 
 % Usage: indexReturnData = getIndexReturnData(tickerLst, initDate, endDate)
 % 
-% Inputs:    tickerLst ....
-%            initDate  ....
-%            endDate  .....
+% Inputs:    tickerLst ......... List of the relevent tickers
+%            initDate  ......... Beginning date of the data
+%            endDate  .......... Ending date of the data
 %
-% Output:    indexReturnData ... 
+% Output:    indexReturnData ... Data of return of the given index
 % 
 	Date = (datetime(initDate) : datetime(endDate)).';
 	indexData = table(Date);
