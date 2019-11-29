@@ -1,5 +1,5 @@
-% main program for Advanced portfolio management comparison between sector
-% or country diversified rolling portfolios
+% main program for advanced portfolio management
+% comparison between sector or country diversified rolling portfolios
 
 % main.m has following components
 % 1 define global variable used through the program
@@ -8,11 +8,12 @@
 % 4 plot
 % 5 conclusion
 
-% Declaration of authorship
+% ============================== Declaration of authorship ============================== %
 % We hereby certify that
 % We have written the program ourselves except for clearly marked pieces of code 
 % We have tested the program and it ran without crashing
 % Leonardo Aldeghi, Francisco Molina, Yifan Zhu
+% ======================================================================================= %
 
 % =============== 1 GLOBAL VARIABLE =============== %
 
