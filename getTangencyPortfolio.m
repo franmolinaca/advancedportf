@@ -10,13 +10,19 @@ function w = getTangencyPortfolio(portfolioPool, tickerNameLst)
 % 
 
 returnMatrix = getReturnMatrix(portfolioPool, tickerNameLst);
-
 covMatrix = getCovMatrix(portfolioPool, tickerNameLst);
 
-% Construct tangency portfolio
+% objective function to minimize
 objFun = @(w) getInverseRatioSharpe(w, portfolioPool, returnMatrix, covMatrix);
 
-w0 = [zeros(length(tickerNameLst)-1, 1); 1];
+% initial guess of weight
+w0 = [zeros(length(tickerNameLst)-1, 1); 1]; 
+
+% fmincon
+% constraint 1: no short selling
+% I * w >= 0;
+% constraint 2: weight sum to 1
+% (1, 1, ..., 1) * w  = 1;
 
 w = fmincon(objFun, w0, ...
 	-eye(length(tickerNameLst)), zeros(length(tickerNameLst), 1), ...
