@@ -303,8 +303,8 @@
 
 	% Calculate average sharpe ratio
 
-	asr_sector_12m = mean(sectorStratOutcome_12m(4, :));
-	asr_country_12m = mean(countryStratOutcome_12m(4, :));
-	asr_sector_3m = mean(sectorStratOutcome_3m(4, :));
-	asr_country_3m = mean(countryStratOutcome_3m(4, :));
+	asr_sector_12m = mean(sectorStratOutcome_12m(4, :))
+	asr_country_12m = mean(countryStratOutcome_12m(4, :))
+	asr_sector_3m = mean(sectorStratOutcome_3m(4, :))
+	asr_country_3m = mean(countryStratOutcome_3m(4, :))
 
